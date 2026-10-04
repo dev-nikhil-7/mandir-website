@@ -1,324 +1,1020 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Bhagwati Sthan, Bhojpandaul</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <style>
-    body { font-family: 'Segoe UI', sans-serif; scroll-behavior: smooth; }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bhagwati Sthan, Bhojpandaul</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&display=swap">
+    <style>
+      body {
+        font-family: "Segoe UI", sans-serif;
+        scroll-behavior: smooth;
+      }
 
-    /* Navbar */
-    .navbar { background: rgba(0,0,0,0.7) !important; transition: background 0.4s; }
-    .navbar.scrolled { background: #212529 !important; }
-    .navbar .nav-link { color: #fff !important; transition: 0.3s; }
-    .navbar .nav-link:hover { color: #ff9800 !important; }
+      /* Navbar */
+      .navbar {
+        background: rgba(0, 0, 0, 0.7) !important;
+        transition: background 0.4s;
+      }
+      .navbar.scrolled {
+        background: #212529 !important;
+      }
+      .navbar .nav-link {
+        color: #fff !important;
+        transition: 0.3s;
+      }
+      .navbar .nav-link:hover {
+        color: #ff9800 !important;
+      }
 
-    /* Hero Carousel */
-    #heroCarousel, .hero-slide { height: 100vh; }
-    .hero-content {
-      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-      text-align: center; color: white;
-    }
-    .hero-content h1 { font-size: 3.5rem; font-weight: bold; text-shadow: 2px 2px 8px rgba(0,0,0,0.7); }
-    .donate-btn {
-      font-size: 1.2rem; padding: 12px 24px; border-radius: 30px; transition: 0.3s;
-    }
-    .donate-btn:hover { transform: scale(1.1); box-shadow: 0 6px 20px rgba(0,0,0,0.3); }
+      /* Hero Carousel */
+      #heroCarousel,
+      .hero-slide {
+        height: 100vh;
+      }
+      .hero-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        color: white;
+      }
+      .hero-content h1 {
+        font-size: 3.5rem;
+        font-weight: bold;
+        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+      }
+      .donate-btn {
+        font-size: 1.2rem;
+        padding: 12px 24px;
+        border-radius: 30px;
+        transition: 0.3s;
+      }
+      .donate-btn:hover {
+        transform: scale(1.1);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+      }
 
-    /* Section Titles */
-    .section-title { margin-bottom: 2rem; font-weight: bold; position: relative; display: inline-block; }
-    .section-title::after {
-      content: ''; position: absolute; width: 60%; height: 3px; background: #ff9800;
-      left: 20%; bottom: -8px; border-radius: 2px;
-    }
+      /* Section Titles */
+      .section-title {
+        margin-bottom: 2rem;
+        font-weight: bold;
+        position: relative;
+        display: inline-block;
+      }
+      .section-title::after {
+        content: "";
+        position: absolute;
+        width: 60%;
+        height: 3px;
+        background: #ff9800;
+        left: 20%;
+        bottom: -8px;
+        border-radius: 2px;
+      }
 
-    /* About */
-    #about p { max-width: 800px; margin: auto; line-height: 1.8; }
+      /* About */
+      #about p {
+        max-width: 800px;
+        margin: auto;
+        line-height: 1.8;
+      }
 
-    /* Person Cards */
-    .person-card {
-      border-radius: 12px; padding: 20px; background: #fff;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1); transition: transform 0.3s;
-    }
-    .person-card:hover { transform: translateY(-8px); }
-    .person-card img {
-      width: 120px; height: 120px; object-fit: cover; border-radius: 50%;
-      margin-bottom: 15px; border: 3px solid #ff9800;
-    }
+      /* Person Cards */
+      .person-card {
+        border-radius: 12px;
+        padding: 20px;
+        background: #fff;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s;
+      }
+      .person-card:hover {
+        transform: translateY(-8px);
+      }
+      .person-card img {
+        width: 120px;
+        height: 120px;
+        object-fit: cover;
+        border-radius: 50%;
+        margin-bottom: 15px;
+        border: 3px solid #ff9800;
+      }
 
-    /* Event */
-    .event-featured img { height: 400px; object-fit: cover; border-radius: 12px 0 0 12px; }
-    .event-content { padding: 20px; }
+      /* Event */
+      .event-featured img {
+        height: 400px;
+        object-fit: cover;
+        border-radius: 12px 0 0 12px;
+      }
+      .event-content {
+        padding: 20px;
+      }
 
-    /* Gallery */
-    .carousel-item img { height: 500px; object-fit: cover; border-radius: 12px; }
+      /* Gallery */
+      .carousel-item img {
+        height: 500px;
+        object-fit: cover;
+        border-radius: 12px;
+      }
 
-    /* Footer */
-    footer { background: #212529; color: #fff; padding: 2rem 0; }
-  </style>
-</head>
-<body>
-<!-- Donate Modal -->
-<div class="modal fade" id="donateModal" tabindex="-1" aria-labelledby="donateModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content text-center">
-      <div class="modal-header">
-        <h5 class="modal-title" id="donateModalLabel">Donate via QR Code</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <!-- QR Code Image -->
-        <img src="images/qr-code.jpeg" alt="Donate QR Code" class="img-fluid mb-3" style="max-width:250px;">
-        <p>Scan this QR Code with any UPI app to donate.</p>
-        <!-- Optional: UPI ID text -->
-         <p><strong>UPI Name :</strong> Nikhil Kumar Vats</p>
-           <p><strong>Contact :</strong> Treasurer - Sushil Chaudhary - 7488568429</p>
-           <p><strong>Contact :</strong> Nikhil Vats - 9470668481</p>
+      /* Footer */
+      footer {
+        background: #212529;
+        color: #fff;
+        padding: 2rem 0;
+      }
+
+      /* ===== KARYKARTA ID CARD GENERATOR ===== */
+      #idcard {
+        background: linear-gradient(135deg, #1a0808 0%, #2d1010 100%);
+      }
+      #idcard .section-title { color: #fff; }
+      #idcard .section-title::after { background: #C8960C; }
+      #idcard .section-subtitle {
+        color: rgba(255,255,255,.65);
+        font-size: .97rem;
+        margin-top: .5rem;
+        margin-bottom: 2.5rem;
+      }
+
+      /* Form panel */
+      .id-form-card {
+        background: rgba(255,255,255,.05);
+        border: 1px solid rgba(200,150,12,.3);
+        border-radius: 16px;
+        padding: 28px 24px;
+      }
+      .id-form-card label {
+        font-size: .82rem;
+        color: #F2D060;
+        font-weight: 600;
+        margin-bottom: 4px;
+        display: block;
+        letter-spacing: .04em;
+      }
+      .id-form-card input,
+      .id-form-card select {
+        width: 100%;
+        background: rgba(255,255,255,.08);
+        border: 1px solid rgba(200,150,12,.4);
+        border-radius: 8px;
+        color: #fff;
+        padding: 9px 13px;
+        font-size: .9rem;
+        margin-bottom: 14px;
+        outline: none;
+        transition: border-color .2s;
+      }
+      .id-form-card input:focus,
+      .id-form-card select:focus { border-color: #C8960C; background: rgba(255,255,255,.12); }
+      .id-form-card input::placeholder { color: rgba(255,255,255,.3); }
+      .id-form-card select option { background: #2d1010; color: #fff; }
+      .id-upload-label {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        border: 1.5px dashed rgba(200,150,12,.5);
+        border-radius: 8px;
+        padding: 11px 14px;
+        cursor: pointer;
+        transition: border-color .2s, background .2s;
+        margin-bottom: 14px;
+        font-size: .82rem;
+        color: #F2D060;
+        font-weight: 600;
+        letter-spacing: .04em;
+      }
+      .id-upload-label:hover { border-color: #C8960C; background: rgba(200,150,12,.08); }
+      .id-upload-label input[type=file] { display: none; }
+      .id-upload-icon { font-size: 1.25rem; }
+      .id-download-btn {
+        display: block;
+        width: 100%;
+        margin-top: 8px;
+        background: linear-gradient(135deg, #C8960C, #F2D060);
+        color: #1a0808;
+        border: none;
+        border-radius: 30px;
+        padding: 13px 0;
+        font-size: 1rem;
+        font-weight: 700;
+        letter-spacing: .05em;
+        cursor: pointer;
+        transition: opacity .2s, transform .15s;
+      }
+      .id-download-btn:hover { opacity: .9; transform: scale(1.02); }
+      .id-download-btn:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+      .id-preview-label {
+        font-size: .7rem;
+        color: rgba(200,150,12,.7);
+        letter-spacing: .12em;
+        text-transform: uppercase;
+        margin-bottom: 14px;
+      }
+
+      /* Floating download button */
+      .id-fab {
+        display: none;
+        position: fixed;
+        bottom: 24px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 999;
+        background: linear-gradient(135deg, #C8960C, #F2D060);
+        color: #1a0808;
+        border: none;
+        border-radius: 50px;
+        padding: 15px 32px;
+        font-size: 1rem;
+        font-weight: 700;
+        letter-spacing: .05em;
+        cursor: pointer;
+        box-shadow: 0 6px 28px rgba(200,150,12,.55);
+        white-space: nowrap;
+        transition: transform .15s, box-shadow .15s;
+      }
+      .id-fab:active { transform: translateX(-50%) scale(.96); box-shadow: 0 3px 14px rgba(200,150,12,.4); }
+      .id-fab { display: block; }
+
+      /* ---- The Card itself ---- */
+      .id-card {
+        width: 320px;
+        border-radius: 16px;
+        overflow: hidden;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background: #6B1A1A;
+        box-shadow: 0 16px 60px rgba(107,26,26,.7), 0 0 0 2px #C8960C;
+        font-family: 'Cinzel', 'Georgia', serif;
+        position: relative;
+      }
+      .id-card-watermark {
+        position: absolute;
+        inset: 0;
+        background-size: cover;
+        background-position: center;
+        opacity: .09;
+        pointer-events: none;
+        z-index: 0;
+        border-radius: 16px;
+      }
+      .id-card > * { position: relative; z-index: 1; }
+
+      .id-card-top-band {
+        width: 100%;
+        background: linear-gradient(90deg, #4A1010 0%, #8B2020 50%, #4A1010 100%);
+        padding: 12px 12px 10px;
+        text-align: center;
+        border-bottom: 2px solid #C8960C;
+      }
+      .id-card-deity-circle {
+        width: 54px;
+        height: 54px;
+        border-radius: 50%;
+        border: 2px solid #C8960C;
+        background: #3a1010 center/cover no-repeat;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.6rem;
+        margin: 0 auto 8px;
+        overflow: hidden;
+        box-shadow: 0 0 0 3px rgba(200,150,12,.25);
+      }
+      .id-card-deity-circle img {
+        width: 100%; height: 100%;
+        object-fit: cover; border-radius: 50%;
+      }
+      .id-card-sub-txt {
+        font-size: .58rem;
+        letter-spacing: .18em;
+        text-transform: uppercase;
+        color: #F2D060;
+        font-family: 'Segoe UI', sans-serif;
+      }
+      .id-card-temple-hi {
+        font-size: 1.08rem;
+        font-weight: 600;
+        color: #fff;
+        margin: 3px 0 1px;
+        font-family: 'Segoe UI', sans-serif;
+      }
+      .id-card-temple-en {
+        font-size: .6rem;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+        color: #F2D060;
+        opacity: .85;
+        font-family: 'Segoe UI', sans-serif;
+      }
+      .id-card-body {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 22px 16px 28px;
+        width: 100%;
+      }
+      .id-card-mandala-ring {
+        position: relative;
+        width: 150px;
+        height: 150px;
+        flex-shrink: 0;
+      }
+      .id-card-mandala-ring .mandala-svg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        animation: idcardSpin 20s linear infinite;
+      }
+      @keyframes idcardSpin { to { transform: rotate(360deg); } }
+      @media (prefers-reduced-motion: reduce) { .id-card-mandala-ring .mandala-svg { animation: none; } }
+      .id-card-photo {
+        position: absolute;
+        inset: 10px;
+        border-radius: 50%;
+        background: #3a1010 center/cover no-repeat;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.9rem;
+      }
+      .id-card-photo img {
+        width: 100%; height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+      }
+      .id-card-gold-div {
+        width: 65%;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, #C8960C, transparent);
+        margin: 14px 0 10px;
+      }
+      .id-card-name-hi {
+        font-size: .98rem;
+        color: #F2D060;
+        font-style: italic;
+        text-align: center;
+        font-family: 'Segoe UI', sans-serif;
+      }
+      .id-card-name-en {
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: #fff;
+        text-align: center;
+        letter-spacing: .05em;
+        margin-top: 2px;
+      }
+      .id-card-role-badge {
+        margin-top: 12px;
+        border: 1px solid #C8960C;
+        border-radius: 4px;
+        padding: 4px 18px;
+        font-size: .65rem;
+        letter-spacing: .18em;
+        color: #F2D060;
+        text-transform: uppercase;
+        font-family: 'Segoe UI', sans-serif;
+      }
+      .id-card-bottom-band {
+        width: 100%;
+        background: linear-gradient(90deg, #4A1010 0%, #7a1a1a 50%, #4A1010 100%);
+        border-top: 1.5px solid #C8960C;
+        padding: 8px 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+      }
+      .id-card-bottom-om {
+        font-size: .95rem;
+        color: #C8960C;
+        line-height: 1;
+      }
+      .id-card-bottom-event {
+        font-family: 'Cinzel', 'Georgia', serif;
+        font-size: .72rem;
+        font-weight: 600;
+        letter-spacing: .16em;
+        color: #F2D060;
+        text-transform: uppercase;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Donate Modal -->
+    <div
+      class="modal fade"
+      id="donateModal"
+      tabindex="-1"
+      aria-labelledby="donateModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content text-center">
+          <div class="modal-header">
+            <h5 class="modal-title" id="donateModalLabel">
+              Donate via QR Code
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <!-- QR Code Image -->
+            <img
+              src="images/qr-code.jpeg"
+              alt="Donate QR Code"
+              class="img-fluid mb-3"
+              style="max-width: 250px"
+            />
+            <p>Scan this QR Code with any UPI app to donate.</p>
+            <!-- Optional: UPI ID text -->
+            <p><strong>UPI Name :</strong>Durga Puja Samiti Bhagwati Asthan</p>
+            <p>
+              <strong>Contact :</strong> Treasurer - Sushil Chaudhary -
+              7488568429
+            </p>
+            <p><strong>Contact :</strong> Nikhil Vats - 9470668481</p>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-    <div class="container">
-      <a class="navbar-brand fw-bold" href="#hero">Bhagwati Sthan, Bhojpandaul</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-          <li class="nav-item"><a class="nav-link" href="#events">Events</a></li>
-          <li class="nav-item"><a class="nav-link" href="#pujaris">Pujaris</a></li>
-          <li class="nav-item"><a class="nav-link" href="#committee">Committee</a></li>
-          <li class="nav-item"><a class="nav-link" href="#gallery">Gallery</a></li>
-          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-          <li class="nav-item">
-            <a class="btn btn-warning ms-2" href="https://durgapooja25.bhojpandaulbhagwati.org/">Admin</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-  <!-- Hero Carousel -->
-  <section id="hero">
-    <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="4000">
-      <div class="carousel-inner">
-        <!-- Slide 1 -->
-        <div class="carousel-item active">
-          <div class="hero-slide" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
-               url('images/hero1.jpg') center/cover no-repeat;">
-            <div class="hero-content">
-              <h1>🙏 Bhagwati Sthan Mandir</h1>
-              <p class="lead">A place of devotion, peace, and community</p>
-              <a href="#" class="btn btn-warning donate-btn mt-3" data-bs-toggle="modal" data-bs-target="#donateModal">
-            Donate / Chanda
-          </a>
-            </div>
-          </div>
-        </div>
-        <!-- Slide 2 -->
-        <div class="carousel-item">
-          <div class="hero-slide" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
-               url('images/hero2.png') center/cover no-repeat;">
-            <div class="hero-content">
-              <h1>🙏 Seek Blessings of Maa Bhagwati</h1>
-              <p class="lead">Join us in daily prayers and aarti</p>
-                      <a href="#" class="btn btn-warning donate-btn mt-3" data-bs-toggle="modal" data-bs-target="#donateModal">
-            Donate / Chanda
-          </a>
-            </div>
-          </div>
-        </div>
-        <!-- Slide 3 -->
-        <div class="carousel-item">
-          <div class="hero-slide" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
-               url('images/hero3.jpg') center/cover no-repeat;">
-            <div class="hero-content">
-              <h1>🙏 Celebrating Festivals Together</h1>
-              <p class="lead">Experience unity, devotion, and joy</p>
-                      <a href="#" class="btn btn-warning donate-btn mt-3" data-bs-toggle="modal" data-bs-target="#donateModal">
-            Donate / Chanda
-          </a>
-            </div>
-          </div>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand fw-bold" href="#hero"
+          >Bhagwati Sthan, Bhojpandaul</a
+        >
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div
+          class="collapse navbar-collapse justify-content-end"
+          id="navbarNav"
+        >
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="#about">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#events">Events</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#pujaris">Pujaris</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#committee">Committee</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#gallery">Gallery</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#contact">Contact</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#idcard">ID Card</a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="btn btn-warning ms-2"
+                href="https://durgapuja.bhojpandaulbhagwati.in/"
+                >Admin</a
+              >
+            </li>
+          </ul>
         </div>
       </div>
-      <!-- Controls -->
-      <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon"></span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon"></span>
-      </button>
-    </div>
-  </section>
+    </nav>
 
-  <!-- About -->
-  <section class="py-5 text-center" id="about">
-    <div class="container">
-      <h2 class="section-title">About the Mandir</h2>
-      <p>
-        Bhagwati Sthan Mandir is a sacred temple dedicated to Maa Bhagwati. It has been a center
-        for spiritual growth, cultural celebrations, and community welfare for decades.
-      </p>
-      <p>
-        Devotees gather here for festivals like Navratri, Kartik Purnima, and Makar Sankranti.
-        The temple not only provides a place for worship but also supports social welfare initiatives,
-        bringing the community together in service and devotion.
-      </p>
-    </div>
-  </section>
-
-  <!-- Featured Event -->
-  <section class="py-5 bg-light" id="events">
-    <div class="container">
-      <h2 class="section-title text-center">Ongoing Event</h2>
-      <div class="card event-featured">
-        <div class="row g-0">
-          <div class="col-md-6">
-            <img src="images/event1.jpg" class="img-fluid" alt="Event">
-          </div>
-          <div class="col-md-6">
-            <div class="event-content">
-              <h3>Navratri Mahotsav</h3>
-              <p><strong>Date:</strong> 22th Sep – 2nd Oct 2025</p>
-              <p>
-                A 9-day celebration with daily aarti, bhajans, cultural programs, and prasad distribution.
-                Devotees from nearby villages gather in huge numbers to seek blessings of Maa Bhagwati.
-              </p>
-              <a href="#" class="btn btn-outline-warning btn-sm">Read More</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Pujaris -->
-  <section class="py-5" id="pujaris">
-    <div class="container">
-      <h2 class="section-title text-center">Our Pujaris & Purohits</h2>
-      <div class="row g-4">
-        <div class="col-md-4 text-center">
-          <div class="person-card">
-            <img src="images/pujari1.jpg" alt="Pujari">
-            <h5>Shri Durga Nand Jha</h5>
-            <p>Main Pujari</p>
-          </div>
-        </div>
-        <div class="col-md-4 text-center">
-          <div class="person-card">
-            <img src="images/pujari2.jpg" alt="Assistant Pujari">
-            <h5>Shri Subodh Mishra</h5>
-            <p>Purohit</p>
-          </div>
-        </div>
-        <div class="col-md-4 text-center">
-          <div class="person-card">
-            <img src="images/pujari3.jpg" alt="Priest">
-            <h5>Shri Manohar Jha</h5>
-            <p>Acharya</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Committee -->
-  <section class="py-5 bg-light" id="committee">
-    <div class="container">
-      <h2 class="section-title text-center">Temple Committee</h2>
-      <div class="row g-4">
-        <div class="col-md-4 text-center">
-          <div class="person-card">
-            <img src="images/committee1.jpeg" alt="Committee">
-            <h5>Shri Ram Babu Mishra</h5>
-            <p>President</p>
-          </div>
-        </div>
-        <div class="col-md-4 text-center">
-          <div class="person-card">
-            <img src="images/committee2.jpg" alt="Committee">
-            <h5>Shri Mantun Jha</h5>
-            <p>Secretary</p>
-          </div>
-        </div>
-        <div class="col-md-4 text-center">
-          <div class="person-card">
-            <img src="images/committee3.jpg" alt="Committee">
-            <h5>Shri Sushil Chaudhary</h5>
-            <p>Treasurer</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Gallery -->
-  <section class="py-5" id="gallery">
-    <div class="container">
-      <h2 class="section-title text-center">Photo Gallery</h2>
-      <div id="mandirCarousel" class="carousel slide" data-bs-ride="carousel">
+    <!-- Hero Carousel -->
+    <section id="hero">
+      <div
+        id="heroCarousel"
+        class="carousel slide carousel-fade"
+        data-bs-ride="carousel"
+        data-bs-interval="4000"
+      >
         <div class="carousel-inner">
+          <!-- Slide 1 -->
           <div class="carousel-item active">
-            <img src="images/gallery1.jpg" class="d-block w-100" alt="Temple">
+            <div
+              class="hero-slide"
+              style="
+                background:
+                  linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+                  url(&quot;images/hero1.jpg&quot;) center/cover no-repeat;
+              "
+            >
+              <div class="hero-content">
+                <h1>🙏 Bhagwati Sthan Mandir</h1>
+                <p class="lead">A place of devotion, peace, and community</p>
+                <a
+                  href="#"
+                  class="btn btn-warning donate-btn mt-3"
+                  data-bs-toggle="modal"
+                  data-bs-target="#donateModal"
+                >
+                  Donate / Chanda
+                </a>
+              </div>
+            </div>
           </div>
+          <!-- Slide 2 -->
           <div class="carousel-item">
-            <img src="images/gallery2.jpg" class="d-block w-100" alt="Festival">
+            <div
+              class="hero-slide"
+              style="
+                background:
+                  linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+                  url(&quot;images/hero2.png&quot;) center/cover no-repeat;
+              "
+            >
+              <div class="hero-content">
+                <h1>🙏 Seek Blessings of Maa Bhagwati</h1>
+                <p class="lead">Join us in daily prayers and aarti</p>
+                <a
+                  href="#"
+                  class="btn btn-warning donate-btn mt-3"
+                  data-bs-toggle="modal"
+                  data-bs-target="#donateModal"
+                >
+                  Donate / Chanda
+                </a>
+              </div>
+            </div>
           </div>
+          <!-- Slide 3 -->
           <div class="carousel-item">
-            <img src="images/gallery3.jpg" class="d-block w-100" alt="Devotees">
+            <div
+              class="hero-slide"
+              style="
+                background:
+                  linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+                  url(&quot;images/hero3.jpg&quot;) center/cover no-repeat;
+              "
+            >
+              <div class="hero-content">
+                <h1>🙏 Celebrating Festivals Together</h1>
+                <p class="lead">Experience unity, devotion, and joy</p>
+                <a
+                  href="#"
+                  class="btn btn-warning donate-btn mt-3"
+                  data-bs-toggle="modal"
+                  data-bs-target="#donateModal"
+                >
+                  Donate / Chanda
+                </a>
+              </div>
+            </div>
           </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#mandirCarousel" data-bs-slide="prev">
+        <!-- Controls -->
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#heroCarousel"
+          data-bs-slide="prev"
+        >
           <span class="carousel-control-prev-icon"></span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#mandirCarousel" data-bs-slide="next">
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#heroCarousel"
+          data-bs-slide="next"
+        >
           <span class="carousel-control-next-icon"></span>
         </button>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Contact -->
-  <section class="py-5" id="contact">
-    <div class="container">
-      <h2 class="section-title text-center">Visit Us</h2>
-      <div class="row">
-        <div class="col-md-6 text-center">
-          <h5>Temple Timings</h5>
-          <p>Morning Aarti: 6:00 AM - 7:00 AM</p>
-          <p>Evening Aarti: 8:00 PM - 9:00 PM</p>
-        </div>
-        <div class="col-md-6 text-center">
-          <h5>Contact</h5>
-          <p>📍 Bhojpandual, Bihar, India</p>
-          <p>📞 +91 9470668481</p>
-          <p>✉️ info@bhojpandaulbhagwati.org</p>
+    <!-- About -->
+    <section class="py-5 text-center" id="about">
+      <div class="container">
+        <h2 class="section-title">About the Mandir</h2>
+        <p>
+          Bhagwati Sthan Mandir is a sacred temple dedicated to Maa Bhagwati. It
+          has been a center for spiritual growth, cultural celebrations, and
+          community welfare for decades.
+        </p>
+        <p>
+          Devotees gather here for festivals like Navratri, Kartik Purnima, and
+          Makar Sankranti. The temple not only provides a place for worship but
+          also supports social welfare initiatives, bringing the community
+          together in service and devotion.
+        </p>
+      </div>
+    </section>
+
+    <!-- Featured Event -->
+    <section class="py-5 bg-light" id="events">
+      <div class="container">
+        <h2 class="section-title text-center">Ongoing Event</h2>
+        <div class="card event-featured">
+          <div class="row g-0">
+            <div class="col-md-6">
+              <img src="images/event1.jpg" class="img-fluid" alt="Event" />
+            </div>
+            <div class="col-md-6">
+              <div class="event-content">
+                <h3>Navratri Mahotsav</h3>
+                <p><strong>Date:</strong> 22th Sep – 2nd Oct 2025</p>
+                <p>
+                  A 9-day celebration with daily aarti, bhajans, cultural
+                  programs, and prasad distribution. Devotees from nearby
+                  villages gather in huge numbers to seek blessings of Maa
+                  Bhagwati.
+                </p>
+                <a href="#" class="btn btn-outline-warning btn-sm">Read More</a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Footer -->
-  <footer class="text-center">
-    <p>© 2025 Bhagwati Sthan, Bhojpandual | Designed with ❤️ for the devotees</p>
-  </footer>
+    <!-- Pujaris -->
+    <section class="py-5" id="pujaris">
+      <div class="container">
+        <h2 class="section-title text-center">Our Pujaris & Purohits</h2>
+        <div class="row g-4">
+          <div class="col-md-4 text-center">
+            <div class="person-card">
+              <img src="images/pujari1.jpg" alt="Pujari" />
+              <h5>Shri Durga Nand Jha</h5>
+              <p>Main Pujari</p>
+            </div>
+          </div>
+          <div class="col-md-4 text-center">
+            <div class="person-card">
+              <img src="images/pujari2.jpg" alt="Assistant Pujari" />
+              <h5>Shri Subodh Mishra</h5>
+              <p>Purohit</p>
+            </div>
+          </div>
+          <div class="col-md-4 text-center">
+            <div class="person-card">
+              <img src="images/pujari3.jpg" alt="Priest" />
+              <h5>Shri Manohar Jha</h5>
+              <p>Acharya</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    // Navbar background change on scroll
-    window.addEventListener("scroll", function() {
-      const navbar = document.querySelector(".navbar");
-      navbar.classList.toggle("scrolled", window.scrollY > 50);
-    });
-  </script>
-  <script>
-  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-</script>
-<script defer src="/_vercel/insights/script.js"></script>
-</body>
+    <!-- Committee -->
+    <section class="py-5 bg-light" id="committee">
+      <div class="container">
+        <h2 class="section-title text-center">Temple Committee</h2>
+        <div class="row g-4">
+          <div class="col-md-4 text-center">
+            <div class="person-card">
+              <img src="images/committee1.jpeg" alt="Committee" />
+              <h5>Shri Ram Babu Mishra</h5>
+              <p>President</p>
+            </div>
+          </div>
+          <div class="col-md-4 text-center">
+            <div class="person-card">
+              <img src="images/committee2.jpg" alt="Committee" />
+              <h5>Shri Mantun Jha</h5>
+              <p>Secretary</p>
+            </div>
+          </div>
+          <div class="col-md-4 text-center">
+            <div class="person-card">
+              <img src="images/committee3.jpg" alt="Committee" />
+              <h5>Shri Sushil Chaudhary</h5>
+              <p>Treasurer</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery -->
+    <section class="py-5" id="gallery">
+      <div class="container">
+        <h2 class="section-title text-center">Photo Gallery</h2>
+        <div id="mandirCarousel" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img
+                src="images/gallery1.jpg"
+                class="d-block w-100"
+                alt="Temple"
+              />
+            </div>
+            <div class="carousel-item">
+              <img
+                src="images/gallery2.jpg"
+                class="d-block w-100"
+                alt="Festival"
+              />
+            </div>
+            <div class="carousel-item">
+              <img
+                src="images/gallery3.jpg"
+                class="d-block w-100"
+                alt="Devotees"
+              />
+            </div>
+          </div>
+          <button
+            class="carousel-control-prev"
+            type="button"
+            data-bs-target="#mandirCarousel"
+            data-bs-slide="prev"
+          >
+            <span class="carousel-control-prev-icon"></span>
+          </button>
+          <button
+            class="carousel-control-next"
+            type="button"
+            data-bs-target="#mandirCarousel"
+            data-bs-slide="next"
+          >
+            <span class="carousel-control-next-icon"></span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="py-5" id="contact">
+      <div class="container">
+        <h2 class="section-title text-center">Visit Us</h2>
+        <div class="row">
+          <div class="col-md-6 text-center">
+            <h5>Temple Timings</h5>
+            <p>Morning Aarti: 6:00 AM - 7:00 AM</p>
+            <p>Evening Aarti: 8:00 PM - 9:00 PM</p>
+          </div>
+          <div class="col-md-6 text-center">
+            <h5>Contact</h5>
+            <p>📍 Bhojpandual, Bihar, India</p>
+            <p>📞 +91 9470668481</p>
+            <p>✉️ info@bhojpandaulbhagwati.org</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Floating Download Button (shown when ID card section is in view) -->
+    <button class="id-fab" id="id-fab" onclick="downloadCard()">⬇&nbsp; Download ID Card</button>
+
+    <!-- Karykarta ID Card Generator -->
+    <section class="py-5 pb-5" id="idcard" style="padding-bottom: 100px !important;">
+      <div class="container">
+        <h2 class="section-title text-center">Karykarta ID Card</h2>
+        <p class="text-center section-subtitle">Fill in the details, upload photos, and download a print-ready ID card.</p>
+
+        <div class="row g-5 align-items-start justify-content-center">
+
+          <!-- FORM -->
+          <div class="col-lg-5 col-xl-4">
+            <div class="id-form-card">
+              <label for="f-name-en">Full Name <span style="color:#ff6b6b;">*</span></label>
+              <input type="text" id="f-name-en" placeholder="Ram Kumar Sharma" oninput="syncCard()">
+              <div id="name-error" style="display:none; color:#ff6b6b; font-size:.78rem; margin-top:-10px; margin-bottom:12px;">Please enter the karykarta's name.</div>
+
+              <label>Karykarta Photo</label>
+              <label class="id-upload-label" for="f-photo">
+                <span class="id-upload-icon">📷</span>
+                <span id="f-photo-lbl">Upload person's photo</span>
+                <input type="file" id="f-photo" accept="image/*" onchange="handleKaryPhoto(this)">
+              </label>
+
+
+            </div>
+          </div>
+
+          <!-- PREVIEW -->
+          <div class="col-lg-5 col-xl-4 text-center d-flex flex-column align-items-center gap-3">
+            <p class="id-preview-label mb-0">Live Preview</p>
+            <div id="id-card-preview" class="id-card">
+              <div class="id-card-watermark" style="background-image:url('images/deity.jpg')"></div>
+              <div class="id-card-top-band">
+                <div class="id-card-deity-circle" id="card-deity-circle">
+                  <img src="images/deity.jpg" alt="Maa Bhagwati">
+                </div>
+                <div class="id-card-sub-txt">Karykarta Parichay Patra</div>
+                <div class="id-card-temple-hi">भगवती स्थान, भोजपंडौल</div>
+                <div class="id-card-temple-en">Bhagwati Sthan, Bhojpandaul</div>
+              </div>
+              <div class="id-card-body">
+                <div class="id-card-mandala-ring">
+                  <svg class="mandala-svg" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="60" cy="60" r="55" stroke="#C8960C" stroke-width=".8" stroke-dasharray="4 3" opacity=".6"/>
+                    <circle cx="60" cy="60" r="50" stroke="#F2D060" stroke-width="1.2" opacity=".5"/>
+                    <g opacity=".7">
+                      <ellipse cx="60" cy="13" rx="4" ry="7" fill="#C8960C" opacity=".6"/>
+                      <ellipse cx="60" cy="13" rx="4" ry="7" fill="#C8960C" opacity=".6" transform="rotate(30 60 60)"/>
+                      <ellipse cx="60" cy="13" rx="4" ry="7" fill="#C8960C" opacity=".6" transform="rotate(60 60 60)"/>
+                      <ellipse cx="60" cy="13" rx="4" ry="7" fill="#C8960C" opacity=".6" transform="rotate(90 60 60)"/>
+                      <ellipse cx="60" cy="13" rx="4" ry="7" fill="#C8960C" opacity=".6" transform="rotate(120 60 60)"/>
+                      <ellipse cx="60" cy="13" rx="4" ry="7" fill="#C8960C" opacity=".6" transform="rotate(150 60 60)"/>
+                      <ellipse cx="60" cy="13" rx="4" ry="7" fill="#C8960C" opacity=".6" transform="rotate(180 60 60)"/>
+                      <ellipse cx="60" cy="13" rx="4" ry="7" fill="#C8960C" opacity=".6" transform="rotate(210 60 60)"/>
+                      <ellipse cx="60" cy="13" rx="4" ry="7" fill="#C8960C" opacity=".6" transform="rotate(240 60 60)"/>
+                      <ellipse cx="60" cy="13" rx="4" ry="7" fill="#C8960C" opacity=".6" transform="rotate(270 60 60)"/>
+                      <ellipse cx="60" cy="13" rx="4" ry="7" fill="#C8960C" opacity=".6" transform="rotate(300 60 60)"/>
+                      <ellipse cx="60" cy="13" rx="4" ry="7" fill="#C8960C" opacity=".6" transform="rotate(330 60 60)"/>
+                    </g>
+                  </svg>
+                  <div class="id-card-photo" id="card-photo-el">
+                    <svg id="card-photo-ph" viewBox="0 0 100 110" xmlns="http://www.w3.org/2000/svg" style="width:82%;height:82%;">
+                      <!-- kurta / shoulders -->
+                      <path d="M18 110 Q18 80 50 75 Q82 80 82 110Z" fill="#CC4400"/>
+                      <path d="M38 76 Q50 82 62 76 L65 110 L35 110Z" fill="#E05500"/>
+                      <!-- kurta collar V -->
+                      <path d="M44 76 L50 86 L56 76" stroke="#F2D060" stroke-width="1.2" fill="none"/>
+                      <!-- neck -->
+                      <rect x="44" y="65" width="12" height="13" rx="4" fill="#D4956A"/>
+                      <!-- rudraksha mala hint -->
+                      <path d="M40 80 Q50 88 60 80" stroke="#8B4513" stroke-width="2" fill="none" stroke-dasharray="2.5 2"/>
+                      <!-- head base / face shape -->
+                      <ellipse cx="50" cy="43" rx="22" ry="26" fill="#D4956A"/>
+                      <!-- ears -->
+                      <ellipse cx="28.5" cy="44" rx="4.5" ry="6.5" fill="#C8845A"/>
+                      <ellipse cx="71.5" cy="44" rx="4.5" ry="6.5" fill="#C8845A"/>
+                      <ellipse cx="28.5" cy="44" rx="2.5" ry="4" fill="#D4956A"/>
+                      <ellipse cx="71.5" cy="44" rx="2.5" ry="4" fill="#D4956A"/>
+                      <!-- hair - dark close-cropped -->
+                      <ellipse cx="50" cy="22" rx="22" ry="12" fill="#1a0a00"/>
+                      <path d="M28 28 Q28 18 50 17 Q72 18 72 28 Q65 20 50 19 Q35 20 28 28Z" fill="#1a0a00"/>
+                      <!-- forehead -->
+                      <rect x="34" y="27" width="32" height="6" rx="3" fill="#D4956A"/>
+                      <!-- tilak - saffron vertical stripe -->
+                      <rect x="48" y="27" width="4" height="13" rx="2" fill="#FF6600"/>
+                      <!-- tilak - white base lines -->
+                      <rect x="46" y="29" width="2" height="9" rx="1" fill="#fff" opacity=".7"/>
+                      <rect x="52" y="29" width="2" height="9" rx="1" fill="#fff" opacity=".7"/>
+                      <!-- tilak - red dot at top -->
+                      <circle cx="50" cy="28.5" r="3" fill="#CC0000"/>
+                      <!-- eyebrows -->
+                      <path d="M37 37 Q42 34 47 37" stroke="#1a0a00" stroke-width="2" fill="none" stroke-linecap="round"/>
+                      <path d="M53 37 Q58 34 63 37" stroke="#1a0a00" stroke-width="2" fill="none" stroke-linecap="round"/>
+                      <!-- eyes whites -->
+                      <ellipse cx="42" cy="42" rx="5.5" ry="4" fill="#fff"/>
+                      <ellipse cx="58" cy="42" rx="5.5" ry="4" fill="#fff"/>
+                      <!-- iris -->
+                      <circle cx="42" cy="42" r="3" fill="#3d1f00"/>
+                      <circle cx="58" cy="42" r="3" fill="#3d1f00"/>
+                      <!-- pupils -->
+                      <circle cx="42" cy="42" r="1.6" fill="#0d0600"/>
+                      <circle cx="58" cy="42" r="1.6" fill="#0d0600"/>
+                      <!-- eye shine -->
+                      <circle cx="43.2" cy="41" r=".9" fill="#fff" opacity=".8"/>
+                      <circle cx="59.2" cy="41" r=".9" fill="#fff" opacity=".8"/>
+                      <!-- kajal lower lash line -->
+                      <path d="M37 44 Q42 46.5 47 44" stroke="#1a0a00" stroke-width=".8" fill="none" opacity=".5"/>
+                      <path d="M53 44 Q58 46.5 63 44" stroke="#1a0a00" stroke-width=".8" fill="none" opacity=".5"/>
+                      <!-- nose -->
+                      <path d="M47 50 Q50 55 53 50" stroke="#B07050" stroke-width="1.2" fill="none"/>
+                      <circle cx="47" cy="50" r="1.5" fill="#C8845A" opacity=".6"/>
+                      <circle cx="53" cy="50" r="1.5" fill="#C8845A" opacity=".6"/>
+                      <!-- lips -->
+                      <path d="M43 58 Q50 55 57 58" stroke="#8B3000" stroke-width="1" fill="none"/>
+                      <path d="M43 58 Q50 63 57 58" fill="#C05030" opacity=".85"/>
+                      <path d="M46 58 Q50 56 54 58" fill="#E06040" opacity=".7"/>
+                      <!-- chin shadow -->
+                      <ellipse cx="50" cy="66" rx="10" ry="3" fill="#C8845A" opacity=".4"/>
+                    </svg>
+                  </div>
+                </div>
+                <div class="id-card-gold-div"></div>
+                <div class="id-card-name-en" id="card-name-en">Your Name Here</div>
+                <div class="id-card-role-badge">Karykarta</div>
+              </div>
+              <div class="id-card-bottom-band">
+                <span class="id-card-bottom-om">ॐ</span>
+                <span class="id-card-bottom-event">Durga Puja 2026</span>
+                <span class="id-card-bottom-om">ॐ</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center">
+      <p>
+        © 2025 Bhagwati Sthan, Bhojpandual | Designed with ❤️ for the devotees
+      </p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script>
+      // Navbar background change on scroll
+      window.addEventListener("scroll", function () {
+        const navbar = document.querySelector(".navbar");
+        navbar.classList.toggle("scrolled", window.scrollY > 50);
+      });
+    </script>
+    <script>
+      // ===== KARYKARTA ID CARD GENERATOR =====
+
+      function syncCard() {
+        var nameEn = document.getElementById('f-name-en').value.trim();
+        document.getElementById('card-name-en').textContent = nameEn || 'Your Name Here';
+        if (nameEn) document.getElementById('name-error').style.display = 'none';
+      }
+
+      function handleKaryPhoto(input) {
+        if (!input.files[0]) return;
+        document.getElementById('f-photo-lbl').textContent = input.files[0].name;
+        var reader = new FileReader();
+        reader.onload = function(e) {
+          var el = document.getElementById('card-photo-el');
+          el.style.backgroundImage = 'url(' + e.target.result + ')';
+          el.style.backgroundSize = 'cover';
+          el.style.backgroundPosition = 'center';
+          var ph = document.getElementById('card-photo-ph');
+          if (ph) ph.style.display = 'none';
+          // also add an <img> so html2canvas can read it
+          var img = el.querySelector('img');
+          if (!img) { img = document.createElement('img'); el.appendChild(img); }
+          img.src = e.target.result;
+          img.style.cssText = 'width:100%;height:100%;object-fit:cover;border-radius:50%;display:block;';
+        };
+        reader.readAsDataURL(input.files[0]);
+      }
+
+
+      function downloadCard() {
+        var nameEn = document.getElementById('f-name-en').value.trim();
+        if (!nameEn) {
+          document.getElementById('name-error').style.display = 'block';
+          document.getElementById('f-name-en').focus();
+          return;
+        }
+        var btn = document.getElementById('id-fab');
+        btn.disabled = true;
+        btn.textContent = 'Generating…';
+
+        var card = document.getElementById('id-card-preview');
+        var svg  = card.querySelector('.mandala-svg');
+        if (svg) {
+          svg.style.animation = 'none';
+          svg.style.transform = 'rotate(0deg)';
+        }
+
+        html2canvas(card, {
+          scale: 2,
+          useCORS: true,
+          allowTaint: true,
+          backgroundColor: '#6B1A1A',
+          logging: false
+        }).then(function(canvas) {
+          var nameEn = document.getElementById('f-name-en').value.trim().replace(/\s+/g, '_') || 'Karykarta';
+          var link = document.createElement('a');
+          link.download = 'ID_Card_' + nameEn + '.jpg';
+          link.href = canvas.toDataURL('image/jpeg', 0.95);
+          link.click();
+        }).catch(function(err) {
+          console.error(err);
+          alert('Could not generate image. Please try again.');
+        }).finally(function() {
+          if (svg) {
+            svg.style.animation = '';
+            svg.style.transform = '';
+          }
+          btn.disabled = false;
+          btn.innerHTML = '&#11015;&nbsp; Download ID Card';
+        });
+      }
+    </script>
+
+    <script>
+      window.va =
+        window.va ||
+        function () {
+          (window.vaq = window.vaq || []).push(arguments);
+        };
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
+  </body>
 </html>
