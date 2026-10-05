@@ -801,7 +801,7 @@
               <label class="id-upload-label" for="f-photo">
                 <span class="id-upload-icon">📷</span>
                 <span id="f-photo-lbl">Upload person's photo</span>
-                <input type="file" id="f-photo" accept="image/*" onchange="handleKaryPhoto(this)">
+                <input type="file" id="f-photo" accept="image/*,.heic,.heif,image/heic,image/heif" onchange="handleKaryPhoto(this)">
               </label>
 
 
@@ -927,6 +927,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js"></script>
     <script>
       // Navbar background change on scroll
       window.addEventListener("scroll", function () {
@@ -965,34 +966,23 @@
                      /\.hei[cf]$/i.test(file.name);
 
         if (isHeic) {
-          // Convert HEIC to JPEG in-browser via heic2any
-          if (typeof heic2any === 'undefined') {
-            var script = document.createElement('script');
-            script.src = 'https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js';
-            script.onload = function() { convertAndApply(file); };
-            document.head.appendChild(script);
-          } else {
-            convertAndApply(file);
-          }
+          document.getElementById('f-photo-lbl').textContent = 'Converting…';
+          heic2any({ blob: file, toType: 'image/jpeg', quality: 0.9 })
+            .then(function(jpegBlob) {
+              document.getElementById('f-photo-lbl').textContent = file.name + ' ✓';
+              var reader = new FileReader();
+              reader.onload = function(e) { applyPhotoDataUrl(e.target.result); };
+              reader.readAsDataURL(jpegBlob);
+            })
+            .catch(function(err) {
+              console.error('HEIC conversion failed', err);
+              document.getElementById('f-photo-lbl').textContent = 'Conversion failed – try a JPG/PNG';
+            });
         } else {
           var reader = new FileReader();
           reader.onload = function(e) { applyPhotoDataUrl(e.target.result); };
           reader.readAsDataURL(file);
         }
-      }
-
-      function convertAndApply(file) {
-        document.getElementById('f-photo-lbl').textContent = 'Converting…';
-        heic2any({ blob: file, toType: 'image/jpeg', quality: 0.9 })
-          .then(function(jpegBlob) {
-            document.getElementById('f-photo-lbl').textContent = file.name + ' (converted)';
-            var reader = new FileReader();
-            reader.onload = function(e) { applyPhotoDataUrl(e.target.result); };
-            reader.readAsDataURL(jpegBlob);
-          })
-          .catch(function() {
-            document.getElementById('f-photo-lbl').textContent = 'Conversion failed – try a JPG/PNG';
-          });
       }
 
 
