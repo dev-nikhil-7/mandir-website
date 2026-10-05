@@ -788,8 +788,8 @@
       </div>
     </section>
 
-    <!-- Floating Download Button (shown when ID card section is in view) -->
-    <button class="id-fab" id="id-fab" onclick="downloadCard()">⬇&nbsp; Download ID Card</button>
+    <!-- Floating Button – scrolls to ID card form -->
+    <button class="id-fab" id="id-fab" onclick="document.getElementById('idcard').scrollIntoView({behavior:'smooth'})">🪪&nbsp; Generate your ID Card</button>
 
     <!-- Karykarta ID Card Generator -->
     <section class="py-5 pb-5" id="idcard" style="padding-bottom: 100px !important;">
@@ -803,23 +803,25 @@
           <div class="col-lg-5 col-xl-4">
             <div class="id-form-card">
               <label for="f-name-en">Full Name <span style="color:#ff6b6b;">*</span></label>
-              <input type="text" id="f-name-en" placeholder="Ram Kumar Sharma" oninput="syncCard()">
+              <input type="text" id="f-name-en" placeholder="Ram Kumar" oninput="syncCard()">
               <div id="name-error" style="display:none; color:#ff6b6b; font-size:.78rem; margin-top:-10px; margin-bottom:12px;">Please enter the karykarta's name.</div>
 
               <label>Karykarta Photo</label>
               <label class="id-upload-label" for="f-photo">
                 <span class="id-upload-icon">📷</span>
-                <span id="f-photo-lbl">Upload person's photo</span>
+                <span id="f-photo-lbl">Upload your photo</span>
                 <input type="file" id="f-photo" accept="image/*,.heic,.heif,image/heic,image/heif" onchange="handleKaryPhoto(this)">
               </label>
 
 
+              <button type="button" class="id-download-btn" onclick="maybeOpenModal()" style="margin-top:4px;">
+                👁&nbsp; Preview ID Card
+              </button>
             </div>
           </div>
 
-          <!-- PREVIEW -->
-          <div class="col-lg-5 col-xl-4 text-center d-flex flex-column align-items-center gap-3">
-            <p class="id-preview-label mb-0">Live Preview</p>
+          <!-- PREVIEW (hidden – shown in modal) -->
+          <div class="d-none">
             <div id="id-card-preview" class="id-card">
               <div class="id-card-watermark" style="background-image:url('images/deity.jpg')"></div>
               <div class="id-card-top-band">
@@ -927,6 +929,24 @@
       </div>
     </section>
 
+    <!-- ID Card Preview Modal -->
+    <div class="modal fade" id="idCardModal" tabindex="-1" aria-labelledby="idCardModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="background:#1a0808; border:1.5px solid #C8960C; border-radius:18px;">
+          <div class="modal-header border-0 pb-0">
+            <h5 class="modal-title" id="idCardModalLabel" style="color:#F2D060; font-family:'Cinzel',serif; letter-spacing:.06em;">ID Card Preview</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body d-flex flex-column align-items-center gap-3 pt-2 pb-4">
+            <div id="id-card-modal-mount"></div>
+            <button class="id-download-btn" id="id-modal-download-btn" onclick="downloadCard()" style="max-width:280px; border-radius:30px; padding:13px 40px;">
+              ⬇&nbsp; Download ID Card
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Footer -->
     <footer class="text-center">
       <p>
@@ -947,6 +967,27 @@
     <script>
       // ===== KARYKARTA ID CARD GENERATOR =====
 
+      var _photoReady = false;
+
+      function maybeOpenModal() {
+        var nameEn = document.getElementById('f-name-en').value.trim();
+        if (!nameEn) {
+          document.getElementById('name-error').style.display = 'block';
+          document.getElementById('f-name-en').focus();
+          return;
+        }
+        // Sync name into card before cloning
+        document.getElementById('card-name-en').textContent = nameEn;
+        var mount = document.getElementById('id-card-modal-mount');
+        var original = document.getElementById('id-card-preview');
+        var clone = original.cloneNode(true);
+        clone.id = 'id-card-modal-clone';
+        clone.style.cssText = 'width:min(320px,85vw);';
+        mount.innerHTML = '';
+        mount.appendChild(clone);
+        bootstrap.Modal.getOrCreateInstance(document.getElementById('idCardModal')).show();
+      }
+
       function syncCard() {
         var nameEn = document.getElementById('f-name-en').value.trim();
         document.getElementById('card-name-en').textContent = nameEn || 'Your Name Here';
@@ -964,6 +1005,8 @@
         if (!img) { img = document.createElement('img'); el.appendChild(img); }
         img.src = dataUrl;
         img.style.cssText = 'width:100%;height:100%;object-fit:cover;border-radius:50%;display:block;';
+        _photoReady = true;
+        maybeOpenModal();
       }
 
       function handleKaryPhoto(input) {
@@ -999,22 +1042,23 @@
         var nameEn = document.getElementById('f-name-en').value.trim();
         if (!nameEn) {
           document.getElementById('name-error').style.display = 'block';
-          document.getElementById('f-name-en').focus();
           return;
         }
-        var btn = document.getElementById('id-fab');
+        var btn = document.getElementById('id-modal-download-btn');
         btn.disabled = true;
         btn.textContent = 'Generating…';
 
-        var card = document.getElementById('id-card-preview');
-        var svg  = card.querySelector('.mandala-svg');
+        // Use the visible clone inside the modal — html2canvas needs a rendered element
+        var card = document.getElementById('id-card-modal-clone') || document.getElementById('id-card-preview');
+
+        var svg = card.querySelector('.mandala-svg');
         if (svg) {
           svg.style.animation = 'none';
           svg.style.transform = 'rotate(0deg)';
         }
 
         html2canvas(card, {
-          scale: 2,
+          scale: 3,
           useCORS: true,
           allowTaint: true,
           backgroundColor: '#6B1A1A',
@@ -1022,8 +1066,8 @@
         }).then(function(canvas) {
           var nameEn = document.getElementById('f-name-en').value.trim().replace(/\s+/g, '_') || 'Karykarta';
           var link = document.createElement('a');
-          link.download = 'ID_Card_' + nameEn + '.jpg';
-          link.href = canvas.toDataURL('image/jpeg', 0.95);
+          link.download = 'ID_Card_' + nameEn + '.png';
+          link.href = canvas.toDataURL('image/png');
           link.click();
         }).catch(function(err) {
           console.error(err);
