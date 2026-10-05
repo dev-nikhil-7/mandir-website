@@ -245,10 +245,17 @@
         cursor: pointer;
         box-shadow: 0 6px 28px rgba(200,150,12,.55);
         white-space: nowrap;
-        transition: transform .15s, box-shadow .15s;
+        transition: transform .25s, box-shadow .15s, opacity .25s, visibility .25s;
       }
       .id-fab:active { transform: translateX(-50%) scale(.96); box-shadow: 0 3px 14px rgba(200,150,12,.4); }
       .id-fab { display: block; }
+      /* Hidden while the ID card section itself is on screen */
+      .id-fab.id-fab-hidden {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transform: translateX(-50%) translateY(16px);
+      }
 
       /* ---- The Card itself ---- */
       .id-card {
@@ -1089,6 +1096,22 @@
         function () {
           (window.vaq = window.vaq || []).push(arguments);
         };
+    </script>
+    <script>
+      // Hide the floating "Generate your ID Card" button once the ID card
+      // section is in view - it only makes sense elsewhere on the page.
+      (function () {
+        var fab = document.getElementById('id-fab');
+        var section = document.getElementById('idcard');
+        if (!fab || !section) return;
+        if (!('IntersectionObserver' in window)) return;
+        new IntersectionObserver(
+          function (entries) {
+            fab.classList.toggle('id-fab-hidden', entries[0].isIntersecting);
+          },
+          { threshold: 0 }
+        ).observe(section);
+      })();
     </script>
     <script defer src="/_vercel/insights/script.js"></script>
   </body>
